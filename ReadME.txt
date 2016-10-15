@@ -1,0 +1,1 @@
+-   All Void method should return object instance to enable chaining

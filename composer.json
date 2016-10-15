@@ -1,0 +1,22 @@
+{
+  "name": "root/plugable",
+  "description": "Plugable & Themeable blog",
+  "authors": [
+    {
+      "name": "Alofe oluwafemi",
+      "email": "oluwafemialofe@yahoo.com"
+    }
+  ],
+  "require": {
+
+  },
+  "require-dev": {
+    "phpunit/phpunit": "5.5.*"
+  },
+  "autoload":
+  {
+    "psr-4" : {
+      "Plugable\\" : "app"
+    }
+  }
+}
