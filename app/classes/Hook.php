@@ -23,30 +23,30 @@ class Hook
      */
     public function register($eventName,$callback,$priority = 1)
     {
-        if(isset($this->events[$eventName]))
-        {
-            $this->events[$eventName][] = array('callback' => $callback,'priority' => $priority);
-        }
+        if(!isset($this->events[$eventName])) $this->events[] = $eventName;
+
+        $this->events[$eventName][] = array('callback' => $callback,'priority' => $priority);
     }
 
     /**
      * @param $eventName
-     * @param $value
+     * @param array $value
      * @param array $params
      * @return mixed|null|void
+     * @internal param array $params
      */
-    public function fire($eventName,$value,$params = array() )
+    public function fire($eventName,$value = null,$params = array())
     {
         $hooks  = $this->events[$eventName];
         $result = null;
 
-        if(!isset($hook)) return;
+        if(!isset($hooks)) return null;
 
         $params = array_merge(array($value),$params);
 
         foreach($hooks as $hook)
         {
-           $result = call_user_func($hook['callback'],$params);
+            $result = call_user_func_array($hook['callback'],$params);
         }
 
         return $result;

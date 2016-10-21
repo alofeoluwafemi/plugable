@@ -62,7 +62,7 @@ class App implements \ArrayAccess
      */
     public function inject($key,$value)
     {
-        $this[$key] = $value;
+        $this->offsetSet($key,$value);
 
         return $this;
     }
@@ -108,7 +108,20 @@ class App implements \ArrayAccess
 
     public function run()
     {
-        var_dump($this);
-        die;
+        //Testing hook with below brief implementation
+//        $this['hook']->register('booting',function($value,$added,$service)
+//        {
+//            $this->menus['Home'] = array('href' => '/home','title' => 'Home','data-title' => 'home');
+//        });
+
+        $requestedResource =    $this['request']->getRequestURI();
+
+        require "{$this->config->base_dir}app/filters.php";
+
+        require "{$this->config->base_dir}app/routes.php";
+
+//        $this['hook']->fire('booting','value',array('added','services'));
+
+        dd($this);
     }
 }

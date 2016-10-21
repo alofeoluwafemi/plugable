@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Turn On the Light
  */

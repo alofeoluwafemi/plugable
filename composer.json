@@ -1,6 +1,6 @@
 {
   "name": "root/plugable",
-  "description": "Plugable & Themeable blog",
+  "description": "Plugable & Themeable Application",
   "authors": [
     {
       "name": "Alofe oluwafemi",
@@ -16,7 +16,14 @@
   "autoload":
   {
     "psr-4" : {
-      "Plugable\\" : "app"
-    }
+      "Plugable\\" : "app/classes",
+      "Plugable\\Contracts\\"   : "app/contracts",
+      "Plugable\\Controllers\\" : "app/controllers",
+      "Plugable\\Traits\\"      : "app/traits"
+    },
+
+    "files" : [
+      "app/functions/helpers.php"
+    ]
   }
 }

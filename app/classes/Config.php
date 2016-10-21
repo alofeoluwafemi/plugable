@@ -16,7 +16,7 @@ class Config implements ConfigInterface
         $baseDir    = dirname(dirname(__DIR__));
         $config     = require("{$baseDir}/config.php");
         
-        $this->configuration = json_encode($config);
+        $this->configuration = (object) ($config);
     }
 
     /**
