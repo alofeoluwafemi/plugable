@@ -108,16 +108,22 @@ class App implements \ArrayAccess
     /**
      * Here we take care of the business logic
      * @param $uri
+     * @param $method
      */
-    public function requestResourceController($uri)
+    public function requestControllerResource($uri,$method)
     {
-        list($controller,$method) = $this['route']->getRouteResource($uri);
+        list($controller,$method) = $this['route']->getRouteResource($uri,$method);
+
+        dd($controller,$method);
     }
 
 
     public function run()
     {
-        $requestedResource =    $this['request']->getRequestURI();
+        $requestedResource =  $this['request']->getRequestURI();
+        $requestMethod     =  strtolower($this['request']->getRequestMethod());
+
+        $this->requestControllerResource($requestedResource,$requestMethod);
 
         $this['hook']->fire('filter.registering',$this);
         $this['hook']->fire('route.registering',$this);

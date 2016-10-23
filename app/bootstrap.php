@@ -10,4 +10,5 @@
 $app['hook']    = new Plugable\Classes\Hook();
 $app['request'] = new Plugable\Classes\Request();
 $app['route']   = new Plugable\Classes\Route($app);
+$app['filter']  = new Plugable\Classes\Filter($app);
 $app['theme']   = new Plugable\Classes\Theme($app);

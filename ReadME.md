@@ -18,7 +18,7 @@ Possibilities includes modifying:
 ##Contributor Notice
 
 -   All Void method should return object instance to enable chaining
--   Bootstrap a object into the global container, and access it anytime from the container. buy accessing the container as an array 
+-   Bootstrap a object into the global container, and access it anytime from the container.By accessing the container as an array 
 
 ##Hooks
 

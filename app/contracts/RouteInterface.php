@@ -10,5 +10,4 @@ interface RouteInterface{
 
     public function any(array $param);
 
-    public function filterPasses();
 }
