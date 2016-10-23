@@ -21,7 +21,17 @@ if(!function_exists('dd'))
      */
     function dd($data)
     {
-        var_dump(func_get_args());
+        $arguments  = func_get_args();
+
+        foreach($arguments as $param)
+        {
+            print_r($param);
+        }
         die;
     }
+}
+
+function config($path)
+{
+
 }

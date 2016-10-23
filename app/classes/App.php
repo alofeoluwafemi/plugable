@@ -43,7 +43,7 @@ class App implements \ArrayAccess
         $this->routes       = array();
         $this->instances    = array();
 
-        $this->config       = $config->configuration;
+        $this->config       = $config;
     }
 
     /**
@@ -105,23 +105,21 @@ class App implements \ArrayAccess
         $this->instances[$key] = $value;
     }
 
+    /**
+     * Here we take care of the business logic
+     * @param $uri
+     */
+    public function requestResourceController($uri)
+    {
+        list($controller,$method) = $this['route']->getRouteResource($uri);
+    }
+
 
     public function run()
     {
-        //Testing hook with below brief implementation
-//        $this['hook']->register('booting',function($value,$added,$service)
-//        {
-//            $this->menus['Home'] = array('href' => '/home','title' => 'Home','data-title' => 'home');
-//        });
-
         $requestedResource =    $this['request']->getRequestURI();
 
-        require "{$this->config->base_dir}app/filters.php";
-
-        require "{$this->config->base_dir}app/routes.php";
-
-//        $this['hook']->fire('booting','value',array('added','services'));
-
-        dd($this);
+        $this['hook']->fire('filter.registering',$this);
+        $this['hook']->fire('route.registering',$this);
     }
 }

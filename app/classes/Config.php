@@ -16,7 +16,7 @@ class Config implements ConfigInterface
         $baseDir    = dirname(dirname(__DIR__));
         $config     = require("{$baseDir}/config.php");
         
-        $this->configuration = (object) ($config);
+        $this->configuration =  $config;
     }
 
     /**
@@ -26,8 +26,17 @@ class Config implements ConfigInterface
      */
     public function set($key, $value = null)
     {
-        $this->configuration->$key = $value;
+        $match = (preg_match('/\./',$key,$matches));
 
+        if(!$match) $this->configuration[$key] = $value;
+
+        $path   =   explode('.',$key);
+        $result =   null;
+
+        foreach($path as $depth)
+        {
+
+        }
         return $this;
     }
 
@@ -37,8 +46,19 @@ class Config implements ConfigInterface
      */
     public function get($key)
     {
-        $value = isset($this->configuration->$key) ? $this->configuration->$key : NULL;
-        return $value;
+        $match = (preg_match('/\./',$key,$matches));
+
+        if(!$match) return onlyWhenAvailable($this->configuration[$key]);
+
+        $path   =   explode('.',$key);
+        $result =   null;
+
+        foreach($path as $depth)
+        {
+            $result = onlyWhenAvailable($result,$this->configuration)[$depth];
+        }
+
+        return $result;
     }
 
 }
